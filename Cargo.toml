@@ -1,0 +1,25 @@
+[package]
+name = "prefixed-tsid"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/palform/prefixed-tsid/"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = "1.0"
+tsid = "0.3"
+serde = { version = "1", features = ["derive"], optional = true }
+sea-orm = { version = "1", default-features = false, optional = true }
+rocket = { version = "0.5", features = ["json"], optional = true }
+schemars = { version = "0.8", optional = true }
+ts-rs = { version = "9", optional = true }
+
+[features]
+default = ["serde"]
+sea-orm = ["dep:sea-orm"]
+rocket = ["dep:rocket"]
+serde = ["dep:serde"]
+schemars = ["dep:schemars"]
+ts-rs = ["dep:ts-rs"]
