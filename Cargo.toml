@@ -5,7 +5,6 @@ edition = "2021"
 repository = "https://github.com/palform/prefixed-tsid/"
 description = "Create Stripe-style prefixed database IDs that are type-safe and portable"
 license = "MIT"
-license-file = "LICENSE.md"
 
 [lib]
 path = "src/lib.rs"

@@ -1,5 +1,7 @@
 # Prefixed TSIDs
 
+[Documentation](https://docs.rs/prefixed-tsid/latest/prefixed_tsid/index.html)
+
 This library allows you to easily create and manage Stripe-style prefixed IDs for your database, using the [`tsid`](https://github.com/jakudlaty/tsid/) crate. For example:
 
 ```
