@@ -1,6 +1,6 @@
 [package]
 name = "prefixed-tsid"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 repository = "https://github.com/palform/prefixed-tsid/"
 description = "Create Stripe-style prefixed database IDs that are type-safe and portable"
@@ -11,10 +11,12 @@ path = "src/lib.rs"
 
 [dependencies]
 anyhow = "1.0"
-tsid = "0.3"
+tsid = { version = "0.3", features = ["debug"], default-features = false }
 serde = { version = "1", features = ["derive"], optional = true }
 sea-orm = { version = "1", default-features = false, optional = true }
-rocket = { version = "0.5", features = ["json"], optional = true }
+rocket = { version = "0.5", features = [
+    "json",
+], optional = true, default-features = false }
 schemars = { version = "0.8", optional = true }
 ts-rs = { version = "9", optional = true }
 
