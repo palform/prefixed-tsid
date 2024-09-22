@@ -1,8 +1,12 @@
-use std::borrow::Cow;
+use std::{borrow::Cow, fmt::Write};
 
 use rocket::{
     data::ToByteUnit,
     form::{error::ErrorKind, FromFormField},
+    http::{
+        impl_from_uri_param_identity,
+        uri::fmt::{Part, Path, UriDisplay},
+    },
     request::FromParam,
     tokio::io::AsyncReadExt,
 };
@@ -33,3 +37,11 @@ impl<'d, Resource: TSIDResource> FromFormField<'d> for TSIDDatabaseID<Resource> 
         Self::from_str(&value).map_err(|e| ErrorKind::Validation(Cow::Owned(e.to_string())).into())
     }
 }
+
+impl<Resource: TSIDResource, P: Part> UriDisplay<P> for TSIDDatabaseID<Resource> {
+    fn fmt(&self, f: &mut rocket::http::uri::fmt::Formatter<'_, P>) -> std::fmt::Result {
+        f.write_str(&self.to_string())
+    }
+}
+
+impl_from_uri_param_identity!([Path] (Resource: TSIDResource) TSIDDatabaseID<Resource>);
