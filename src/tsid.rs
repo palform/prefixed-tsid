@@ -17,6 +17,8 @@ use tsid::{create_tsid, TSID};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "ts-rs", derive(ts_rs::TS))]
 #[cfg_attr(feature = "ts-rs", ts(type = "string", concrete(Resource = IDUnknown)))]
+#[cfg_attr(feature = "diesel", derive(diesel::expression::AsExpression))]
+#[cfg_attr(feature = "diesel", diesel(sql_type = diesel::sql_types::BigInt))]
 pub struct TSIDDatabaseID<Resource: TSIDResource> {
     pub(crate) id: TSID,
     resource: PhantomData<Resource>,

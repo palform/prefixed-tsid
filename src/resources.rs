@@ -17,8 +17,6 @@ macro_rules! id_resource_type {
     };
 }
 
-id_resource_type!(IDOrganisation, "org_");
-
 #[derive(Eq, PartialEq, Clone, Copy, Debug, Hash)]
 pub struct IDUnknown;
 impl TSIDResource for IDUnknown {
