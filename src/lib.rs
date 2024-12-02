@@ -3,6 +3,8 @@
 pub mod resources;
 pub mod tsid;
 
+#[cfg(feature = "diesel")]
+pub mod diesel;
 #[cfg(feature = "rocket")]
 pub mod rocket;
 #[cfg(feature = "schemars")]

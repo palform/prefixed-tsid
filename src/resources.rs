@@ -1,6 +1,7 @@
 use std::hash::Hash;
+use std::fmt::Debug;
 
-pub trait TSIDResource: Eq + PartialEq + Clone + Copy + Hash + Send {
+pub trait TSIDResource: Eq + PartialEq + Clone + Copy + Hash + Send + Debug {
     fn prefix() -> Option<String>;
 }
 

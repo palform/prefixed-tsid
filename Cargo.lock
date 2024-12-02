@@ -252,7 +252,10 @@ version = "2.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cbf9649c05e0a9dbd6d0b0b8301db5182b972d0fd02f0a7c6736cf632d7c0fd5"
 dependencies = [
+ "bitflags",
+ "byteorder",
  "diesel_derives",
+ "itoa",
 ]
 
 [[package]]
@@ -988,7 +991,7 @@ dependencies = [
 
 [[package]]
 name = "prefixed-tsid"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "diesel",
