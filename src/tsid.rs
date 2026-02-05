@@ -5,7 +5,7 @@ use std::{
     marker::PhantomData,
     ops::Deref,
 };
-use tsid::{create_tsid, TSID};
+use tsid::{TSID, create_tsid};
 
 /// Represents a prefixed, type-safe, resource-specific ID in your database.
 /// The resource is defined by `Resource`: when deserializing, that resource must be matched when
