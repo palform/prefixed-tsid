@@ -1,8 +1,8 @@
-use std::marker::PhantomData;
+use std::{marker::PhantomData, str::FromStr};
 
 use serde::{
-    de::{Unexpected, Visitor},
     Deserialize, Serialize,
+    de::{Unexpected, Visitor},
 };
 
 use crate::{resources::TSIDResource, tsid::TSIDDatabaseID};

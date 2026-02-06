@@ -4,6 +4,7 @@ use std::{
     fmt::{Debug, Display},
     marker::PhantomData,
     ops::Deref,
+    str::FromStr,
 };
 use tsid::{TSID, create_tsid};
 
@@ -64,24 +65,6 @@ impl<Resource: TSIDResource> TSIDDatabaseID<Resource> {
             resource: PhantomData,
         }
     }
-
-    /// Attempts to parse a string into a `TSIDDatabaseID` matching the prefix of the specified
-    /// resource. If the string does not contain a prefix, or it contains the wrong one, an error
-    /// will be returned instead.
-    ///
-    /// If the resource does not require a prefix, any string is accepted, as long as it is a valid
-    /// base32-encoded TSID.
-    pub fn from_str(v: &str) -> Result<TSIDDatabaseID<Resource>, anyhow::Error> {
-        let tsid_only = if let Some(prefix) = Resource::prefix() {
-            v.strip_prefix(&format!("{}_", prefix))
-                .ok_or(anyhow!("missing prefix {}_", prefix))?
-        } else {
-            v
-        };
-
-        let tsid = TSID::try_from(tsid_only).map_err(|_| anyhow!("invalid tsid"))?;
-        Ok(TSIDDatabaseID::<Resource>::from(tsid))
-    }
 }
 
 impl<Resource: TSIDResource> Display for TSIDDatabaseID<Resource> {
@@ -107,5 +90,27 @@ impl<Resource: TSIDResource> From<TSID> for TSIDDatabaseID<Resource> {
             id: value,
             resource: PhantomData,
         }
+    }
+}
+
+impl<Resource: TSIDResource> FromStr for TSIDDatabaseID<Resource> {
+    type Err = anyhow::Error;
+
+    /// Attempts to parse a string into a `TSIDDatabaseID` matching the prefix of the specified
+    /// resource. If the string does not contain a prefix, or it contains the wrong one, an error
+    /// will be returned instead.
+    ///
+    /// If the resource does not require a prefix, any string is accepted, as long as it is a valid
+    /// base32-encoded TSID.
+    fn from_str(v: &str) -> Result<TSIDDatabaseID<Resource>, anyhow::Error> {
+        let tsid_only = if let Some(prefix) = Resource::prefix() {
+            v.strip_prefix(&format!("{}_", prefix))
+                .ok_or(anyhow!("missing prefix {}_", prefix))?
+        } else {
+            v
+        };
+
+        let tsid = TSID::try_from(tsid_only).map_err(|_| anyhow!("invalid tsid"))?;
+        Ok(TSIDDatabaseID::<Resource>::from(tsid))
     }
 }

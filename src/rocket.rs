@@ -1,8 +1,8 @@
-use std::{borrow::Cow, fmt::Write};
+use std::{borrow::Cow, fmt::Write, str::FromStr};
 
 use rocket::{
     data::ToByteUnit,
-    form::{error::ErrorKind, FromFormField},
+    form::{FromFormField, error::ErrorKind},
     http::{
         impl_from_uri_param_identity,
         uri::fmt::{Part, Path, UriDisplay},
