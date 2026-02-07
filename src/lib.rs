@@ -15,3 +15,5 @@ pub mod schemars;
 pub mod sea_orm;
 #[cfg(feature = "serde")]
 pub mod serde;
+#[cfg(feature = "utoipa")]
+pub mod utoipa;

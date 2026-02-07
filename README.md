@@ -4,13 +4,13 @@
 
 This library allows you to easily create and manage resource-specific prefixed IDs for your database, using the [`tsid`](https://github.com/jakudlaty/tsid/) crate. See [this article](https://www.foxhound.systems/blog/time-sorted-unique-identifiers/) for an explanation of why TSIDs are cool. For example:
 
-```
+```ignore
 org_0GTM2MERJJE1T
 ```
 
 Each type of resource gets its own unique prefix, and is represented as a type-safe ID in your code. You can declare resources manually or using our handy macro:
 
-```rust
+```rust,ignore
 id_resource_type!(IDOrganisation, "org");
 
 // equals:
@@ -26,7 +26,7 @@ impl TSIDResource for IDOrganisation {
 
 Then, you can easily create a random instance of the ID:
 
-```rust
+```rust,ignore
 let org_id = TSIDDatabaseID::<IDOrganisation>::random();
 ```
 
