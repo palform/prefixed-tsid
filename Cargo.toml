@@ -1,6 +1,6 @@
 [package]
 name = "prefixed-tsid"
-version = "0.8.0"
+version = "0.9.0"
 edition = "2024"
 repository = "https://github.com/palform/prefixed-tsid/"
 description = "Create Stripe-style prefixed database IDs that are type-safe and portable"
@@ -25,6 +25,8 @@ oasgen = { version = "0.25", optional = true }
 utoipa = { version = "5", optional = true, default-features = false, features = [
     "macros",
 ] }
+apistos = { version = "0.6", optional = true, default-features = false }
+apistos-schemars = { version = "0.8", optional = true, default-features = false }
 
 [features]
 default = ["serde"]
@@ -36,3 +38,4 @@ ts-rs = ["dep:ts-rs"]
 diesel = ["dep:diesel"]
 oasgen = ["dep:oasgen"]
 utoipa = ["dep:utoipa"]
+apistos = ["dep:apistos", "dep:apistos-schemars", "serde"]

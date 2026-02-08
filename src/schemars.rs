@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use schemars::{json_schema, JsonSchema, Schema, SchemaGenerator};
+use schemars::{JsonSchema, Schema, SchemaGenerator, json_schema};
 
 use crate::{resources::TSIDResource, tsid::TSIDDatabaseID};
 

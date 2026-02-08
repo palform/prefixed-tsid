@@ -3,6 +3,8 @@
 pub mod resources;
 pub mod tsid;
 
+#[cfg(feature = "apistos")]
+pub mod apistos;
 #[cfg(feature = "diesel")]
 pub mod diesel;
 #[cfg(feature = "oasgen")]
