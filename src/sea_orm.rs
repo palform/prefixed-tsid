@@ -1,6 +1,6 @@
 use sea_orm::{
-    sea_query::{ArrayType, Nullable, ValueType, ValueTypeErr},
     ColIdx, ColumnType, DbErr, QueryResult, TryFromU64, TryGetError, TryGetable, Value,
+    sea_query::{ArrayType, Nullable, ValueType, ValueTypeErr},
 };
 
 use crate::{resources::TSIDResource, tsid::TSIDDatabaseID};
@@ -13,7 +13,10 @@ impl<Resource: TSIDResource> TryGetable for TSIDDatabaseID<Resource> {
 
 impl<Resource: TSIDResource> ValueType for TSIDDatabaseID<Resource> {
     fn try_from(v: Value) -> Result<Self, ValueTypeErr> {
-        <i64 as ValueType>::try_from(v).map(|v| TSIDDatabaseID::from_integer(v))
+        match v {
+            Value::BigUnsigned(Some(n)) => Ok(TSIDDatabaseID::from_raw_number(n)),
+            v => <i64 as ValueType>::try_from(v).map(TSIDDatabaseID::from_integer),
+        }
     }
 
     fn type_name() -> String {
